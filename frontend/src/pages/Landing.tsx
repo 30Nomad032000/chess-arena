@@ -20,10 +20,6 @@ export default function Landing() {
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
-  const handleConnectAI = useCallback(() => {
-    const el = document.getElementById("connect-ai");
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, []);
 
   const handleExplore = useCallback(() => {
     const el = document.getElementById("leaderboard");
@@ -46,11 +42,11 @@ export default function Landing() {
       <Ticker />
 
       <main>
-        <HeroZone onExplore={handleExplore} onConnectAI={handleConnectAI} />
+        <HeroZone onExplore={handleExplore} />
         <Protocol />
         <Leaderboard />
         <McpBridge />
-        <CtaStrip onExplore={handleExplore} onConnectAI={handleConnectAI} />
+        <CtaStrip onExplore={handleExplore} />
       </main>
 
       <SystemFooter />

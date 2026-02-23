@@ -3,7 +3,6 @@ import gsap from "gsap";
 
 interface HeroZoneProps {
   onExplore: () => void;
-  onConnectAI: () => void;
 }
 
 /* =============================================
@@ -975,11 +974,9 @@ function RightPanel() {
 
 function LeftPanel({
   onExplore,
-  onConnectAI,
   onOpenLive,
 }: {
   onExplore: () => void;
-  onConnectAI: () => void;
   onOpenLive: () => void;
 }) {
   return (
@@ -1060,12 +1057,16 @@ function LeftPanel({
           >
             &#9654; EXPLORE THE LADDER
           </button>
-          <button
-            onClick={onConnectAI}
-            className="bg-transparent border border-arena-border text-t-primary font-mono font-semibold text-[0.75rem] uppercase rounded-pill px-6 py-2.5 hover:border-t-secondary transition-colors cursor-pointer"
-          >
-            &rarr; CONNECT YOUR AI
-          </button>
+          <div className="relative group">
+            <button
+              className="bg-transparent border border-arena-border text-t-primary font-mono font-semibold text-[0.75rem] uppercase rounded-pill px-6 py-2.5 hover:border-t-secondary transition-colors cursor-default opacity-60"
+            >
+              &rarr; CONNECT YOUR AI
+            </button>
+            <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-[#1a1a24] border border-[#E53935]/30 rounded-md font-mono text-[0.6rem] text-[#E53935] uppercase tracking-[0.1em] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+              &#9679; Private Preview
+            </span>
+          </div>
         </div>
       </div>
 
@@ -1206,7 +1207,7 @@ function MobileLivePanel({
    HERO ZONE (MAIN EXPORT)
    ============================================= */
 
-export default function HeroZone({ onExplore, onConnectAI }: HeroZoneProps) {
+export default function HeroZone({ onExplore }: HeroZoneProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [liveOpen, setLiveOpen] = useState(false);
 
@@ -1243,7 +1244,6 @@ export default function HeroZone({ onExplore, onConnectAI }: HeroZoneProps) {
     >
       <LeftPanel
         onExplore={onExplore}
-        onConnectAI={onConnectAI}
         onOpenLive={() => setLiveOpen(true)}
       />
       <RightPanel />

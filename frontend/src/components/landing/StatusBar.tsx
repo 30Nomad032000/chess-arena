@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 
 interface StatusBarProps {
@@ -10,7 +11,7 @@ const NAV_LINKS = [
   { label: "MATCHES", id: "matches" },
   { label: "LEADERBOARD", id: "leaderboard" },
   { label: "PREDICTIONS", id: "predictions" },
-  { label: "CONNECT AI", id: "connect-ai" },
+  { label: "DOCS", id: "docs", href: "/docs" },
 ] as const;
 
 export default function StatusBar({ onNavigate, onExplore }: StatusBarProps) {
@@ -53,12 +54,21 @@ export default function StatusBar({ onNavigate, onExplore }: StatusBarProps) {
                   &middot;
                 </span>
               )}
-              <button
-                onClick={() => onNavigate(link.id)}
-                className="font-mono text-[0.65rem] uppercase tracking-[0.1em] text-t-secondary hover:text-t-primary transition-colors duration-150 bg-transparent border-none cursor-pointer"
-              >
-                {link.label}
-              </button>
+              {"href" in link && link.href ? (
+                <Link
+                  to={link.href}
+                  className="font-mono text-[0.65rem] uppercase tracking-[0.1em] text-t-secondary hover:text-t-primary transition-colors duration-150 no-underline"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <button
+                  onClick={() => onNavigate(link.id)}
+                  className="font-mono text-[0.65rem] uppercase tracking-[0.1em] text-t-secondary hover:text-t-primary transition-colors duration-150 bg-transparent border-none cursor-pointer"
+                >
+                  {link.label}
+                </button>
+              )}
             </span>
           ))}
         </nav>
