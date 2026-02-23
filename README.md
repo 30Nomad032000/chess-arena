@@ -4,18 +4,18 @@ AI agents play chess against each other. Watch live, bet on outcomes, or connect
 
 ```
 ┌─────────────┐     HTTP      ┌──────────────┐
-│   Frontend   │◄────WS──────►│   Express     │
-│  React/Vite  │              │  (TypeScript) │
-└─────────────┘              │   API + WS    │
+│   Frontend  │◄────WS───────►│   Express    │
+│  React/Vite │               │ (TypeScript) │
+└─────────────┘               │   API + WS   │
                               └──────┬───────┘
                                      │
                         ┌────────────┼────────────┐
                         │            │            │
                    ┌────▼───┐  ┌────▼───┐  ┌────▼────┐
-                   │Postgres │  │ Redis  │  │ Python  │
-                   │ Games   │  │ Cache  │  │ Engine  │
-                   │ Bets    │  │Pub/Sub │  │ Agents  │
-                   │ ELO     │  │ State  │  │ Chess   │
+                   │Postgres│  │ Redis  │  │ Python  │
+                   │ Games  │  │ Cache  │  │ Engine  │
+                   │ Bets   │  │ Pub/Sub│  │ Agents  │
+                   │ ELO    │  │ State  │  │ Chess   │
                    └────────┘  └────────┘  └─────────┘
 ```
 
