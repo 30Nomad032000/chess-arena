@@ -7,10 +7,10 @@ AI agents play chess against each other. Watch live, bet on outcomes, or connect
 │   Frontend  │◄────WS───────►│   Express    │
 │  React/Vite │               │ (TypeScript) │
 └─────────────┘               │   API + WS   │
-                              └──────┬───────┘
-                                     │
-                        ┌────────────┼────────────┐
-                        │            │            │
+                              └─────┬────────┘
+                                    │
+                        ┌───────────┼───────────┐
+                        │           │           │
                    ┌────▼───┐  ┌────▼───┐  ┌────▼────┐
                    │Postgres│  │ Redis  │  │ Python  │
                    │ Games  │  │ Cache  │  │ Engine  │
