@@ -221,6 +221,128 @@ function Callout({
 }
 
 /* ═══════════════════════════════════════════════════
+   ARCHITECTURE DIAGRAM (rendered as styled divs)
+   ═══════════════════════════════════════════════════ */
+
+function ArchNode({
+  label,
+  sub,
+  port,
+  accent,
+}: {
+  label: string;
+  sub: string;
+  port: string;
+  accent?: string;
+}) {
+  return (
+    <div className="arch-node" style={accent ? { borderColor: accent } : {}}>
+      <span className="arch-node-label">{label}</span>
+      <span className="arch-node-sub">{sub}</span>
+      <span className="arch-node-port" style={accent ? { color: accent } : {}}>
+        {port}
+      </span>
+    </div>
+  );
+}
+
+function ArchDiagram() {
+  return (
+    <div className="arch-diagram">
+      {/* Top row */}
+      <div className="arch-row">
+        <ArchNode
+          label="Frontend"
+          sub="React / Vite"
+          port=":5173"
+          accent="var(--green)"
+        />
+        <div className="arch-connector">
+          <span className="arch-connector-line" />
+          <span className="arch-connector-label">HTTP / WS</span>
+          <span className="arch-connector-line" />
+        </div>
+        <ArchNode
+          label="Express"
+          sub="API + WebSocket"
+          port=":3001"
+          accent="var(--red)"
+        />
+      </div>
+
+      {/* Vertical connector */}
+      <div className="arch-vert">
+        <span className="arch-vert-line" />
+      </div>
+
+      {/* Bottom row */}
+      <div className="arch-row arch-row--bottom">
+        <ArchNode label="PostgreSQL" sub="Games, Bets, ELO" port=":5432" />
+        <ArchNode label="Redis" sub="Cache, Pub/Sub" port=":6379" />
+        <ArchNode
+          label="Python Engine"
+          sub="Chess AI + Agents"
+          port=":8000"
+          accent="var(--amber)"
+        />
+      </div>
+    </div>
+  );
+}
+
+function McpFlowDiagram() {
+  return (
+    <div className="arch-diagram">
+      {/* Main horizontal flow */}
+      <div className="arch-row">
+        <ArchNode
+          label="Claude Desktop"
+          sub="LLM Client"
+          port="MCP Host"
+          accent="var(--amber)"
+        />
+        <div className="arch-connector">
+          <span className="arch-connector-line" />
+          <span className="arch-connector-label">stdio</span>
+          <span className="arch-connector-line" />
+        </div>
+        <ArchNode
+          label="MCP Server"
+          sub="Python, stdio transport"
+          port="mcp/server.py"
+          accent="var(--green)"
+        />
+        <div className="arch-connector">
+          <span className="arch-connector-line" />
+          <span className="arch-connector-label">HTTP</span>
+          <span className="arch-connector-line" />
+        </div>
+        <ArchNode
+          label="Express API"
+          sub="Match orchestrator"
+          port=":3001"
+          accent="var(--red)"
+        />
+      </div>
+
+      {/* Vertical connector down from Express */}
+      <div className="arch-vert" style={{ marginLeft: "auto", paddingRight: 60 }}>
+        <span className="arch-vert-line" />
+      </div>
+
+      {/* Python engine below Express */}
+      <div style={{ marginLeft: "auto", paddingRight: 20 }}>
+        <ArchNode
+          label="Python Engine"
+          sub="Chess AI + Logic"
+          port=":8000"
+        />
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
    CONTENT PAGES
    ═══════════════════════════════════════════════════ */
 
@@ -393,23 +515,7 @@ $ curl -X POST http://localhost:3001/api/bets \\
           The Python engine handles chess logic and AI agent computation. Redis
           provides caching and pub/sub for real-time events.
         </p>
-        <CodeBlock
-          lang="bash"
-          title="Architecture"
-          code={`┌─────────────┐    HTTP/WS    ┌──────────────┐
-│   Frontend   │◄────────────►│   Express    │
-│  React/Vite  │              │  API + WS    │
-│    :5173     │              │    :3001     │
-└─────────────┘              └──────┬───────┘
-                                    │
-                       ┌────────────┼────────────┐
-                       │            │            │
-                  ┌────▼───┐  ┌────▼───┐  ┌────▼────┐
-                  │Postgres│  │ Redis  │  │ Python  │
-                  │ :5432  │  │ :6379  │  │ Engine  │
-                  │        │  │        │  │ :8000   │
-                  └────────┘  └────────┘  └─────────┘`}
-        />
+        <ArchDiagram />
 
         <h2 id="data-flow">Data Flow</h2>
         <ol>
@@ -1362,14 +1468,7 @@ $ npx wscat -c ws://localhost:3001/ws/game/a1b2c3d4-...`}
           </li>
         </ol>
 
-        <CodeBlock
-          lang="bash"
-          title="Flow diagram"
-          code={`Claude Desktop ──stdio──► MCP Server ──HTTP──► Express API
-                                                      │
-                                                Python Engine
-                                                (chess logic)`}
-        />
+        <McpFlowDiagram />
 
         <h2 id="agent-flow">Agent Flow</h2>
         <CodeBlock

@@ -597,6 +597,13 @@ select option { background: var(--bg-secondary); color: var(--text-primary); }
   font-family: var(--font-mono);
   font-size: 0.68rem;
   color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.docs-breadcrumb > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .docs-breadcrumb-group {
@@ -1035,6 +1042,136 @@ select option { background: var(--bg-secondary); color: var(--text-primary); }
   font-size: 0.82rem;
   color: var(--text);
   font-weight: 500;
+}
+
+/* ── Architecture Diagram ── */
+
+.arch-diagram {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--void);
+  padding: 32px 24px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+}
+
+.arch-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: nowrap;
+}
+
+.arch-row--bottom {
+  gap: 16px;
+}
+
+.arch-node {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  padding: 12px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 120px;
+  transition: border-color 0.2s;
+}
+
+.arch-node:hover {
+  background: var(--elevated);
+}
+
+.arch-node-label {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.arch-node-sub {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-dim);
+}
+
+.arch-node-port {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.arch-connector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+}
+
+.arch-connector-line {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--border);
+}
+
+.arch-connector-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.arch-vert {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.arch-vert-line {
+  display: block;
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+}
+
+@media (max-width: 600px) {
+  .arch-diagram {
+    padding: 20px 12px;
+  }
+
+  .arch-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .arch-row--bottom {
+    gap: 8px;
+  }
+
+  .arch-connector {
+    flex-direction: column;
+    padding: 4px 0;
+  }
+
+  .arch-connector-line {
+    width: 1px;
+    height: 16px;
+  }
+
+  .arch-node {
+    min-width: 100px;
+    padding: 8px 16px;
+  }
 }
 
 /* ── Responsive ── */
