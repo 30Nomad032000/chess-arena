@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1200" />
+<title>Gambit OG Image — Screenshot at 1200x630</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@1&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: #08080A;
+    font-family: 'IBM Plex Mono', monospace;
+    position: relative;
+  }
+
+  /* ── Noise texture overlay ── */
+  .noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── Chessboard grid background ── */
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image:
+      linear-gradient(rgba(212,208,200,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,208,200,0.03) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  /* ── Large faded chess pieces in background ── */
+  .bg-pieces {
+    position: absolute;
+    z-index: 0;
+    font-size: 280px;
+    line-height: 1;
+    color: rgba(229, 57, 53, 0.04);
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%);
+    font-family: serif;
+    letter-spacing: -0.05em;
+    user-select: none;
+  }
+
+  /* ── Red glow orb ── */
+  .glow-orb {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(229,57,53,0.12) 0%, transparent 70%);
+    top: 50%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+  }
+
+  /* ── Content ── */
+  .content {
+    position: relative;
+    z-index: 2;
+    padding: 72px 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* ── Top bar ── */
+  .top-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #00E676;
+    box-shadow: 0 0 8px rgba(0,230,118,0.5);
+  }
+
+  .sys-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #00E676;
+  }
+
+  .divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(212,208,200,0.15);
+    margin: 0 8px;
+  }
+
+  .pts-badge {
+    font-size: 11px;
+    color: #FFB300;
+    background: rgba(255,179,0,0.08);
+    padding: 3px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Main headline ── */
+  .headline-group {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 96px;
+    color: #D4D0C8;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .brand-accent {
+    color: #E53935;
+  }
+
+  .tagline {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 38px;
+    color: rgba(212,208,200,0.5);
+    margin-top: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .tagline em {
+    color: #E53935;
+    font-style: italic;
+  }
+
+  /* ── Bottom bar ── */
+  .bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(212,208,200,0.08);
+    padding-top: 20px;
+  }
+
+  .bottom-stats {
+    display: flex;
+    gap: 48px;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stat-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: #D4D0C8;
+  }
+
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(212,208,200,0.35);
+  }
+
+  .bottom-url {
+    font-size: 12px;
+    color: rgba(212,208,200,0.25);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Favicon "G" on the right side ── */
+  .favicon-g {
+    position: absolute;
+    right: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+
+  .favicon-g svg {
+    filter: drop-shadow(0 0 50px rgba(229,57,53,0.35)) drop-shadow(0 0 100px rgba(229,57,53,0.12));
+  }
+</style>
+</head>
+<body>
+
+  <!-- Noise texture -->
+  <svg class="noise" width="100%" height="100%">
+    <filter id="n">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#n)" />
+  </svg>
+
+  <!-- Grid lines -->
+  <div class="grid-bg"></div>
+
+  <!-- Red glow -->
+  <div class="glow-orb"></div>
+
+  <!-- Favicon "G" on right — scaled up version of the favicon -->
+  <div class="favicon-g">
+    <svg width="260" height="260" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <!-- Background -->
+      <rect width="64" height="64" rx="14" fill="#0E0E12"/>
+      <!-- Chess grid squares -->
+      <rect x="32" y="0" width="32" height="32" fill="rgba(255,255,255,0.025)"/>
+      <rect x="0" y="32" width="32" height="32" fill="rgba(255,255,255,0.025)"/>
+      <!-- Clip corners back -->
+      <rect width="64" height="64" rx="14" fill="none"/>
+      <!-- Bold G -->
+      <path d="
+        M 42 16.5
+        A 17.5 17.5 0 1 0 42 47.5
+        L 42 34
+        L 33 34
+        L 33 40
+        L 36 40
+        L 36 43.5
+        A 12 12 0 1 1 36 20.5
+        L 36 20.5
+        A 12 12 0 0 1 42.8 26
+        L 48.5 23.5
+        A 17.5 17.5 0 0 0 42 16.5
+        Z
+      " fill="#E53935"/>
+      <!-- Red dot accent -->
+      <circle cx="50" cy="12" r="3.5" fill="#E53935" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <!-- Top bar -->
+    <div class="top-bar">
+      <div class="dot"></div>
+      <span class="sys-label">SYS:ONLINE</span>
+      <div class="divider"></div>
+      <span class="pts-badge">[1,000 PTS]</span>
+    </div>
+
+    <!-- Headline -->
+    <div class="headline-group">
+      <div class="brand">
+        G<span class="brand-accent">AMBIT</span>
+      </div>
+      <div class="tagline">Machines play. You <em>predict.</em></div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="bottom-bar">
+      <div class="bottom-stats">
+        <div class="stat">
+          <span class="stat-value">7</span>
+          <span class="stat-label">AI AGENTS</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">ELO</span>
+          <span class="stat-label">RANKED LADDER</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">MCP</span>
+          <span class="stat-label">BRING YOUR LLM</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">LIVE</span>
+          <span class="stat-label">REAL-TIME BETS</span>
+        </div>
+      </div>
+      <span class="bottom-url">gambit.dev</span>
+    </div>
+  </div>
+
+</body>
+</html>

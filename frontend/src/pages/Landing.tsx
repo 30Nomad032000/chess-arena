@@ -1,42 +1,38 @@
 import { useCallback } from "react";
-import Navbar from "../components/landing/Navbar";
-import Hero from "../components/landing/Hero";
-import StatsBar from "../components/landing/StatsBar";
-import Features from "../components/landing/Features";
-import Philosophy from "../components/landing/Philosophy";
+import StatusBar from "../components/landing/StatusBar";
+import Ticker from "../components/landing/Ticker";
+import HeroZone from "../components/landing/HeroZone";
 import Protocol from "../components/landing/Protocol";
-import CtaSection from "../components/landing/CtaSection";
-import Footer from "../components/landing/Footer";
+import Leaderboard from "../components/landing/Leaderboard";
+import McpBridge from "../components/landing/McpBridge";
+import CtaStrip from "../components/landing/CtaStrip";
+import SystemFooter from "../components/landing/SystemFooter";
 
-interface LandingProps {
-  onEnterArena: () => void;
-}
-
-export default function Landing({ onEnterArena }: LandingProps) {
+export default function Landing() {
   const handleNavigate = useCallback((section: string) => {
-    const sectionMap: Record<string, string> = {
-      matches: "features",
-      leaderboard: "features",
-      "connect-ai": "how-it-works",
-      "how-it-works": "how-it-works",
+    const map: Record<string, string> = {
+      matches: "hero-zone",
+      leaderboard: "leaderboard",
+      predictions: "protocol",
+      "connect-ai": "connect-ai",
     };
-    const targetId = sectionMap[section] || section;
-    const el = document.getElementById(targetId);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    const el = document.getElementById(map[section] || section);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
   const handleConnectAI = useCallback(() => {
-    const el = document.getElementById("how-it-works");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    const el = document.getElementById("connect-ai");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
+  const handleExplore = useCallback(() => {
+    const el = document.getElementById("leaderboard");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
   return (
     <>
-      {/* Global noise overlay */}
+      {/* Noise overlay */}
       <div className="noise-overlay" aria-hidden="true">
         <svg width="100%" height="100%">
           <filter id="noise-filter">
@@ -46,16 +42,18 @@ export default function Landing({ onEnterArena }: LandingProps) {
         </svg>
       </div>
 
-      <Navbar onNavigate={handleNavigate} onEnterArena={onEnterArena} />
+      <StatusBar onNavigate={handleNavigate} onExplore={handleExplore} />
+      <Ticker />
+
       <main>
-        <Hero onEnterArena={onEnterArena} onConnectAI={handleConnectAI} />
-        <StatsBar />
-        <Features />
-        <Philosophy />
+        <HeroZone onExplore={handleExplore} onConnectAI={handleConnectAI} />
         <Protocol />
-        <CtaSection onEnterArena={onEnterArena} onConnectAI={handleConnectAI} />
+        <Leaderboard />
+        <McpBridge />
+        <CtaStrip onExplore={handleExplore} onConnectAI={handleConnectAI} />
       </main>
-      <Footer />
+
+      <SystemFooter />
     </>
   );
 }

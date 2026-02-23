@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background -->
+  <rect width="64" height="64" rx="14" fill="#0E0E12"/>
+
+  <!-- Subtle chess grid: two lighter squares (top-right, bottom-left) -->
+  <rect x="32" y="0" width="32" height="32" rx="0" fill="rgba(255,255,255,0.025)"/>
+  <rect x="0" y="32" width="32" height="32" rx="0" fill="rgba(255,255,255,0.025)"/>
+  <!-- Re-round the corners with a clip -->
+  <rect width="64" height="64" rx="14" fill="none" stroke="#0E0E12" stroke-width="0"/>
+
+  <!-- Bold "G" letterform — geometric, Space Grotesk inspired -->
+  <!-- Outer arc of the G -->
+  <path d="
+    M 42 16.5
+    A 17.5 17.5 0 1 0 42 47.5
+    L 42 34
+    L 33 34
+    L 33 40
+    L 36 40
+    L 36 43.5
+    A 12 12 0 1 1 36 20.5
+    L 36 20.5
+    A 12 12 0 0 1 42.8 26
+    L 48.5 23.5
+    A 17.5 17.5 0 0 0 42 16.5
+    Z
+  " fill="#E53935"/>
+
+  <!-- Red dot accent — like the dot-red in the UI -->
+  <circle cx="50" cy="12" r="3.5" fill="#E53935" opacity="0.5"/>
+</svg>
